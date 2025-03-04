@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Tinder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+        }
+        .pet-card {
+            background-color: #ffffff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+            padding: 15px;
+            width: 250px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pet-card img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            font-size: 20px;
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .like-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .favorite-btn {
+            background-color: #ff6347;
+            color: white;
+        }
+        .dislike-btn {
+            background-color: #ff4500;
+            color: white;
+        }
+        select, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to Pet Tinder</h1>
+
+    <!-- Filter Form -->
+    <form method="POST" action="/filter">
+        <select name="zone">
+            <option value="All">All Zones</option>
+            <option value="Downtown">Downtown</option>
+            <option value="Cambridge">Cambridge</option>
+            <option value="Back Bay">Back Bay</option>
+        </select>
+        <select name="type">
+            <option value="All">All Types</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Rabbit">Rabbit</option>
+        </select>
+        <select name="price">
+            <option value="All">All Prices</option>
+            <option value="20">Up to $20</option>
+            <option value="30">Up to $30</option>
+            <option value="50">Up to $50</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Link to Add Pet Page -->
+    <p><a href="/add_pet"><button>Add a New Pet</button></a></p>
+
+    <div class="pets">
+        {% for pet in pets %}
+        <div class="pet-card">
+            <img src="{{ url_for('static', filename='images/' + pet['image']) }}" alt="{{ pet['name'] }}">
+            <h3>{{ pet['name'] }}</h3>
+            <p>{{ pet['description'] }}</p>
+            <p>Zone: {{ pet['zone'] }}</p>
+            <p>Price: ${{ pet['price'] }}</p>
+            <p>Type: {{ pet['type'] }}</p>
+            
+            <div class="buttons">
+                <a href="/like/{{ loop.index0 }}"><button class="like-btn">💚 Like</button></a>
+                <a href="/favorite/{{ loop.index0 }}"><button class="favorite-btn">😍 Favorite</button></a>
+                <a href="/dislike/{{ loop.index0 }}"><button class="dislike-btn">❌ Dislike</button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
