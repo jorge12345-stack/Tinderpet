@@ -1,5 +1,5 @@
 
-#PetTinder
+# PetTinder
  
 Welcome to Pet Tinder, a minimalist web app built with Flask that allows you to browse, filter, and maintain a pet’s collection!  PetPal has a minimal interface for adding pets, filtering them by various attributes, and tagging your favorites, whether you're a pet enthusiast searching for new furry friends or a pet adoption company owner. I'm thrilled to present to you this project, which marries usability with functionality in a playful manner to illustrate how Flask can produce dynamic web sites with zero overhead.
  
